@@ -12,7 +12,7 @@ Frontend: HTML/CSS/JavaScript. Backend va inference: Cloudflare Workers AI. Hugg
 
 Zuxrash AI — Bekiuz AI’dan alohida GitHub repository va alohida Cloudflare Worker. Bu repoda `main` branch ishlatiladi; `bekiuz/bekiuz-ai` repodagi Bekiuz AI’ga tegmaydi.
 
-Cloudflare Dashboard → Workers & Pages → Create → Connect to Git. Repository: `bekiuz/zuxrash-ai`, production branch: `main`, deploy command: `npx wrangler deploy`. `wrangler.toml` ichidagi Worker nomi `zuxrash-ai` bo‘lib, odatda alohida `zuxrash-ai.<account-subdomain>.workers.dev` manzili beriladi.
+Cloudflare Dashboard → Workers & Pages → Create → Connect to Git. **Backend repo: `bekiuz/zuxrash_ai` (underscore bilan)**, production branch: `main`, deploy command: `npx wrangler deploy`. `bekiuz/zuxrash-ai` (defis bilan) esa boshqa, statik prototip reposi — uni Android ilovasining API serveri sifatida tanlamang. `wrangler.toml` ichidagi Worker nomi `zuxrash-ai`; to‘liq URL uchun Cloudflare panelida ko‘rsatilgan haqiqiy account subdomainidan foydalaning.
 
 ## Public endpoint himoyasi
 
@@ -49,3 +49,8 @@ Cloudflare Workers AI bepul rejasi kuniga **10,000 Neuron** beradi; limit UTC 00
 - `public/app.js` — chat, history, per-browser identifier
 - `src/index.js` — Cloudflare Worker backend
 - `wrangler.toml` — Workers AI + rate limiting bindings
+
+
+## HTTP 404 troubleshooting
+
+Android ilovasida `HTTP 404` chiqsa, ilovaning `API_BASE_URL` to‘liq Worker production URLiga tengligini tekshiring (yo‘l qo‘shimchalarsiz; ilova `/api/chat` yo‘lini o‘zi qo‘shadi). Cloudflare’da aynan `bekiuz/zuxrash_ai` repo deploy qilingan bo‘lishi va `GET /api/health` JSON qaytarishi kerak. Account subdomain boshqacha bo‘lsa, Android `app/build.gradle.kts` dagi `API_BASE_URL` ni haqiqiy manzilga moslang.
